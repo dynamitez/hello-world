@@ -12,7 +12,9 @@ payload={'txtOrderNo':trackid}
 r=requests.post(url,data=payload)
 
 print ('\n','\tRetrieve track log for:',trackid)
-print ('\tRetrieve status:',r.status_code)
+if r.status_code!=200:
+    print ('\tRetrieve status:',r.status_code)
+    quit()
 
 soup= BeautifulSoup(r.text,"html.parser")
 if soup.find('li',class_='finished')!=None:
